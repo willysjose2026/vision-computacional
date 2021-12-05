@@ -2,6 +2,7 @@ import cv2
 import time
 import os
 import handDetector as hd
+import facerecognition
 
 
 class GestureDetector():
@@ -13,12 +14,15 @@ class GestureDetector():
         self.tipIds = [4, 8, 12, 16, 20]
         self.message = ''
 
+        
+
 
     def gestureDetection(self):
         
         while True:
-            success, self.img = self.cap.read()
-            self.img = cv2.flip(self.img,1)
+            self.facerecognition = facerecognition.FaceRecognition(self.cap)
+            self.img = self.facerecognition
+            #self.img = cv2.flip(self.img,1)
             self.img = self.detector.findHands(self.img)
             lmList = self.detector.findPosition(self.img, draw=False)
             # print(lmList)
